@@ -7,7 +7,7 @@ interface Props {
 
 const NewsCard: React.FC<Props> = ({ post }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md w-[60vw] p-4 m-2 flex flex-col md:flex-row ">
+    <div className="bg-white rounded-lg shadow-md   p-4 m-2 my-4 flex flex-col md:flex-row ">
       <div className="md:mr-4 mb-4 md:mb-0 md:w-[20vw] md:h-[30vh] ">
         <img src={post.thumbnailURL} alt={post.title} className=" w-full h-full object-cover rounded-md" />
       </div>
