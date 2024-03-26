@@ -7,6 +7,7 @@ import NewsCard from "@/components/News";
 import Navbar from "@/components/ui/cors/Navbar";
 import Search from "@/components/ui/Search";
 import Image from 'next/image'
+import { Subscribe } from "@/components/ui/Subscribe";
 
 const newsData = {
   posts: [
@@ -55,7 +56,15 @@ const Index: React.FC = () => {
   const filteredPosts = newsData.posts.filter(post =>
     post.source.toLowerCase().includes(searchKeyword.toLowerCase())
   );
-  
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpen = () => {
+    setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
 
   const filter = () =>{
 
@@ -68,7 +77,7 @@ const Index: React.FC = () => {
   // }
   return (
     <div className="bg-gray-100 w-full min-h-screen">
-      <Navbar />
+      <Navbar handler={handleOpen}/>
       <div className="relative pt-10 pb-8 flex items-center justify-center flex-col w-full  px-10   overflow-hidden  ">
         <div className="sticky top-0 left-0 w-full    flex flex-col justify-center items-center ">
         <Search searchKeyword={searchKeyword} handleSearchInputChange={handleSearchInputChange} />
@@ -105,6 +114,11 @@ const Index: React.FC = () => {
             </section>}
         </section>
       </div>
+      <Subscribe
+            isOpen={isOpen}
+            onClose={handleClose}
+            message={`Once you subscribe to a keyword and time specification you will recieve news including your keyword timely. Thank you!`}
+          />
     </div>
   );
 };

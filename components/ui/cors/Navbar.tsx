@@ -1,7 +1,11 @@
 import React,{useState,useEffect} from 'react'
 import Image from 'next/image'
 import Link from 'next/link';
-export default function Navbar() {
+type NavbarProps = {
+  handler: () => void
+}
+
+export default function Navbar({handler}:NavbarProps ) {
 
     const [isSticky, setIsSticky] = useState(false);
 
@@ -27,7 +31,7 @@ export default function Navbar() {
     <Link href={'/'}><Image src="/Rectangle11.png" alt="Logo" width={60} height={60} className="mb-2 hover:cursor-pointer transition-all duration-300 ease-in-out hover:scale-110" /></Link>
     {/* <img src="/Rectangle11.png" alt="Logo" className="mb-2 h-[18vh]" /> */}
 
-      <button className="bg-blue-500 flex items-center px-4 py-2  rounded-full hover:bg-blue-400">
+      <button className="bg-blue-500 flex items-center px-4 py-2  rounded-full hover:bg-blue-400" onClick={handler}>
         <span className='mr-4'>Subscribe to Keyword</span>
         <Image src="/vector.svg" alt="add" width={20} height={20} className=''/>
       </button>
