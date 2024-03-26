@@ -9,7 +9,9 @@ type SubscribeProps = {
 export const Subscribe = ({ isOpen, onClose, message }: SubscribeProps) => {
   const [frequency, setFrequency] = useState<string>("");
 
-  const handleFrequencyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleFrequencyChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
     setFrequency(event.target.value);
   };
 
@@ -24,12 +26,11 @@ export const Subscribe = ({ isOpen, onClose, message }: SubscribeProps) => {
           className="absolute top-1 right-2 text-gray-600 hover:text-gray-900 focus:outline-none"
           onClick={onClose}
         >
-            X
+          X
         </button>
         {/* main section of modal */}
         <div className="flex justify-center items-center bg-gradient-to-br from-green-400 to-blue-500 rounded-lg overflow-hidden">
           <div className="w-full md:w-1/2 m-6 relative h-full">
-         
             {/* Text Message */}
             <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center bg-black bg-opacity-50">
               <h1 className="text-3xl font-bold mb-4">Subscribe to Keyword</h1>
@@ -40,7 +41,10 @@ export const Subscribe = ({ isOpen, onClose, message }: SubscribeProps) => {
           <div className="w-full md:w-1/2 p-8">
             <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
               <div className="mb-4">
-                <label className="block text-gray-700 text-sm mb-2" htmlFor="email">
+                <label
+                  className="block text-gray-700 text-sm mb-2"
+                  htmlFor="email"
+                >
                   Email
                 </label>
                 <input
@@ -49,7 +53,10 @@ export const Subscribe = ({ isOpen, onClose, message }: SubscribeProps) => {
                   type="text"
                   placeholder="Email"
                 />
-                <label className="block text-gray-700 text-sm mb-2" htmlFor="keyword">
+                <label
+                  className="block text-gray-700 text-sm mb-2"
+                  htmlFor="keyword"
+                >
                   Keyword
                 </label>
                 <input
@@ -58,7 +65,10 @@ export const Subscribe = ({ isOpen, onClose, message }: SubscribeProps) => {
                   type="text"
                   placeholder="Keyword"
                 />
-                <label className="block text-gray-700 text-sm mb-2" htmlFor="frequency">
+                <label
+                  className="block text-gray-700 text-sm mb-2"
+                  htmlFor="frequency"
+                >
                   Frequency
                 </label>
                 <select

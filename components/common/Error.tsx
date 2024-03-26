@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const Error: React.FC = () => {
   return (
@@ -8,7 +8,7 @@ const Error: React.FC = () => {
         <p className="text-gray-800">bad request</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Error
+export default Error;

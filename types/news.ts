@@ -1,14 +1,13 @@
 export enum NewsStatus {
-    'approved',
-    'declined',
-  }
+  "approved",
+  "declined",
+}
 
-  export interface News {
-    date: string,
-    thumbnailURL: string,
-    title: string,
-    source: string,
-    linkToNews: string,
-    visited: boolean
-  }
-  
+export interface News {
+  date: string;
+  thumbnailURL: string;
+  title: string;
+  source: string;
+  linkToNews: string;
+  visited: boolean;
+}
