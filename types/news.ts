@@ -4,10 +4,15 @@ export enum NewsStatus {
 }
 
 export interface News {
-  date: string;
-  thumbnailURL: string;
+  id: number;
+  pub_date: string;
+  thumbnail: string;
   title: string;
   source: string;
   linkToNews: string;
-  visited: boolean;
+  is_verified: boolean;
+}
+
+export interface NewsData {
+  results: News[];
 }

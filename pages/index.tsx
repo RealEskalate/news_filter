@@ -1,63 +1,104 @@
 import { useGetNewsQuery } from "@/store/features/news/news-api";
 import Error from "@/components/common/Error";
 import React, { useEffect, useState } from "react";
-import { News } from "@/types/news";
 import Loading from "@/components/common/Loading";
 import NewsCard from "@/components/News";
 import Navbar from "@/components/ui/cors/Navbar";
 import Search from "@/components/ui/Search";
 import Image from "next/image";
 import { Subscribe } from "@/components/ui/Subscribe";
-
-const newsData = {
-  posts: [
-    {
-      date: "2024-03-21",
-      thumbnailURL:
-        "https://images.freeimages.com/images/large-previews/c31/colors-1383652.jpg",
-      title:
-        "Breaking News: Scientists Discover New Species of Glittering Beetles",
-      source: "The Entomology Gazette",
-      linkToNews: "https://example.com/article1",
-      visited: false,
-    },
-    {
-      date: "2024-03-21",
-      thumbnailURL:
-        "https://images.freeimages.com/images/large-previews/c31/colors-1383652.jpg",
-      title:
-        "SpaceX Launches First Tourist Mission SpaceX Launches First Tourist Mission SpaceX Launches First Tourist MissionSpaceX Launches First Tourist MissionSpaceX Launches First Tourist MissionSpaceX Launches First Tourist Mission ",
-      source: "Galactic Explorer",
-      linkToNews: "https://example.com/article2",
-      visited: true,
-    },
-    {
-      date: "2024-03-21",
-      thumbnailURL:
-        "https://images.freeimages.com/images/large-previews/c31/colors-1383652.jpg",
-      title: "World's Largest Pizza Created in Italy",
-      source: "Pizza Enthusiast Weekly",
-      linkToNews: "https://example.com/article3",
-      visited: false,
-    },
-  ],
-  limit: 10,
-  skip: 1,
-};
+import axios from "axios";
+import { News, NewsData } from "@/types/news";
+import ShimmerEffect from "@/components/ui/ShimmerEffect";
+import ErrorComponent from "@/components/ui/cors/ErrorComponent";
+// const newsData = {
+//   posts: [
+//     {
+//       date: "2024-03-21",
+//       thumbnailURL:
+//         "https://images.freeimages.com/images/large-previews/c31/colors-1383652.jpg",
+//       title:
+//         "Breaking News: Scientists Discover New Species of Glittering Beetles",
+//       source: "The Entomology Gazette",
+//       linkToNews: "https://example.com/article1",
+//       visited: false,
+//     },
+//     {
+//       date: "2024-03-21",
+//       thumbnailURL:
+//         "https://images.freeimages.com/images/large-previews/c31/colors-1383652.jpg",
+//       title:
+//         "SpaceX Launches First Tourist Mission SpaceX Launches First Tourist Mission SpaceX Launches First Tourist MissionSpaceX Launches First Tourist MissionSpaceX Launches First Tourist MissionSpaceX Launches First Tourist Mission ",
+//       source: "Galactic Explorer",
+//       linkToNews: "https://example.com/article2",
+//       visited: true,
+//     },
+//     {
+//       date: "2024-03-21",
+//       thumbnailURL:
+//         "https://images.freeimages.com/images/large-previews/c31/colors-1383652.jpg",
+//       title: "World's Largest Pizza Created in Italy",
+//       source: "Pizza Enthusiast Weekly",
+//       linkToNews: "https://example.com/article3",
+//       visited: false,
+//     },
+//   ],
+//   limit: 10,
+//   skip: 1,
+// };
 
 const Index: React.FC = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
+  const [newsData, setNewsData] = useState<NewsData>({ results: [] });
+  const [filteredPosts, setFilteredPosts] = useState<News[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [fetchTrigger, setFetchTrigger] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Fetch all data initially
+    const fetchAllData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get("/api/search");
+        console.log("response is", response.data.results);
+
+        setNewsData(response.data);
+        setFilteredPosts(response.data.results);
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+        setIsError(true);
+        setIsLoading(false);
+      }
+    };
+
+    fetchAllData();
+  }, [fetchTrigger]);
+
+  useEffect(() => {
+    // Filter posts based on search keyword
+    if (searchKeyword) {
+      const filtered = newsData.results.filter((post) =>
+        post.source.toLowerCase().includes(searchKeyword.toLowerCase()) ||  post.title.includes(searchKeyword)
+      );
+      setFilteredPosts(filtered);
+    } else {
+      setFilteredPosts(newsData.results);
+    }
+  }, [searchKeyword, newsData.results]);
+
+  const resetError = () => {
+    setIsError(false);
+    setFetchTrigger((prev) => !prev);
+  };
 
   const handleSearchInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setSearchKeyword(event.target.value);
   };
-
-  const filteredPosts = newsData.posts.filter((post) =>
-    post.source.toLowerCase().includes(searchKeyword.toLowerCase()),
-  );
-  const [isOpen, setIsOpen] = useState(false);
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -83,37 +124,30 @@ const Index: React.FC = () => {
             searchKeyword={searchKeyword}
             handleSearchInputChange={handleSearchInputChange}
           />
-
-          {/* <div className=" w-full  m-2 p-2 flex justify-center items-center">
-            <input
-              type="search"
-              placeholder="Search"
-              className="w-[80%] px-4 py-2 rounded-l-full border border-gray-300  focus:border-blue-500"
-            />
-            <div className="bg-gray-200 px-3 py-2 rounded-r-full flex items-center">
-              <img
-                src="/search-icon.svg"
-                alt="Search Icon"
-                className="w-5 h-5"
-              />
-            </div>
-          </div> */}
         </div>
 
-        <section className=" w-full md:w-2/3 mt-8 h-[70vh] overflow-auto scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-200">
-          {filteredPosts.length > 0 ? (
-            filteredPosts?.map((post: News) => (
+        {isLoading ? (
+          // Shimmer effect while loading
+          <ShimmerEffect count={3} />
+        ) : isError ? (
+          // Error message
+          <ErrorComponent  reset={resetError} />
+        ) : filteredPosts.length > 0 ? (
+          // Render filtered news posts
+          <section className="w-full md:w-2/3 mt-8 h-[70vh] overflow-auto scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-200">
+            {filteredPosts.map((post: News) => (
               <NewsCard post={post} key={post.title} />
-            ))
-          ) : (
-            <section>
-              <div className="flex h-[150px] w-full flex-col items-center justify-center text-gray-300">
-                <Image src="/no_data.svg" alt="d" width={100} height={100} />
-                <p>No Data</p>
-              </div>
-            </section>
-          )}
-        </section>
+            ))}
+          </section>
+        ) : (
+          // No data message
+          <section>
+            <div className="flex h-[150px] w-full flex-col items-center justify-center text-gray-300">
+              <Image src="/no_data.svg" alt="d" width={100} height={100} />
+              <p>No Data</p>
+            </div>
+          </section>
+        )}
       </div>
       <Subscribe
         isOpen={isOpen}

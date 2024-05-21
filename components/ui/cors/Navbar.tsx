@@ -41,7 +41,7 @@ export default function Navbar({ handler }: NavbarProps) {
       {/* <img src="/Rectangle11.png" alt="Logo" className="mb-2 h-[18vh]" /> */}
 
       <button
-        className="bg-blue-500 flex items-center px-4 py-2  rounded-full hover:bg-blue-400"
+        className="bg-blue-500 flex items-center px-8 py-2  rounded-full hover:bg-blue-400"
         onClick={handler}
       >
         <span className="mr-4">Subscribe to Keyword</span>
