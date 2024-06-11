@@ -32,20 +32,16 @@ export default async function handler(
       console.error("Error subscribing:", error);
       if (error instanceof AxiosError) {
         // Forward the actual error message from the API response
-        res
-          .status(error.response?.status || 500)
-          .json({
-            message:
-              error.response?.data ||
-              "An error occurred while processing your request.",
-          });
+        res.status(error.response?.status || 500).json({
+          message:
+            error.response?.data ||
+            "An error occurred while processing your request.",
+        });
       } else {
         // Handle other errors
-        res
-          .status(500)
-          .json({
-            message: "An unknown error occurred while processing your request.",
-          });
+        res.status(500).json({
+          message: "An unknown error occurred while processing your request.",
+        });
       }
     }
   } else {
