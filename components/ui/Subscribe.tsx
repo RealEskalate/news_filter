@@ -146,9 +146,12 @@ export const Subscribe = ({ isOpen, onClose, message }: SubscribeProps) => {
                   value={frequency}
                 >
                   <option value="">Select Frequency</option>
-                  <option value="once_a_week">Once a week</option>
-                  <option value="twice_a_week">Twice a week</option>
-                  <option value="once_a_day">Once a month</option>
+                  <option value="immediately">immediately</option>
+                  <option value="once_a_day">once a day</option>
+                  <option value="twice_a_day">twice a day</option>
+                  <option value="once_a_week">once a week</option>
+                  
+                
                 </select>
               </div>
               <div className="flex items-center justify-between">

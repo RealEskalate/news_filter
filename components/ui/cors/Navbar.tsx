@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { AiOutlinePlus } from 'react-icons/ai'
 type NavbarProps = {
   handler: () => void;
 };
@@ -45,13 +46,7 @@ export default function Navbar({ handler }: NavbarProps) {
         onClick={handler}
       >
         <span className="mr-4">Subscribe to Keyword</span>
-        <Image
-          src="/vector.svg"
-          alt="add"
-          width={20}
-          height={20}
-          className=""
-        />
+        <AiOutlinePlus className="text-white text-bold text-2xl" />
       </button>
     </div>
   );
