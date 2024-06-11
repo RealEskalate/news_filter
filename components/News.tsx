@@ -12,7 +12,9 @@ const NewsCard: React.FC<Props> = ({ post }) => {
   const handleCheckboxChange = async () => {
     const newVerificationStatus = !isVerified;
     try {
-      await axios.get(`/api/verification/${post.id}?status=${newVerificationStatus}`);
+      await axios.get(
+        `/api/verification/${post.id}?status=${newVerificationStatus}`,
+      );
       setIsVerified(newVerificationStatus); // Update local state
     } catch (error) {
       console.error("Error updating verification status:", error);
@@ -34,7 +36,12 @@ const NewsCard: React.FC<Props> = ({ post }) => {
             {post.title}
           </h2>
           <p className="text-gray-600 text-sm mb-1">
-            {post.source} | {new Date(post.pub_date).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            {post.source} |{" "}
+            {new Date(post.pub_date).toLocaleString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
           </p>
           {/* <a href={post.link}>
             <button className="px-5 py-3 rounded-full bg-blue-500">

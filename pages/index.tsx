@@ -80,8 +80,10 @@ const Index: React.FC = () => {
   useEffect(() => {
     // Filter posts based on search keyword
     if (searchKeyword) {
-      const filtered = newsData.results.filter((post) =>
-        post.source.toLowerCase().includes(searchKeyword.toLowerCase()) ||  post.title.includes(searchKeyword)
+      const filtered = newsData.results.filter(
+        (post) =>
+          post.source.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+          post.title.includes(searchKeyword),
       );
       setFilteredPosts(filtered);
     } else {
@@ -95,7 +97,7 @@ const Index: React.FC = () => {
   };
 
   const handleSearchInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setSearchKeyword(event.target.value);
   };
@@ -131,7 +133,7 @@ const Index: React.FC = () => {
           <ShimmerEffect count={3} />
         ) : isError ? (
           // Error message
-          <ErrorComponent  reset={resetError} />
+          <ErrorComponent reset={resetError} />
         ) : filteredPosts.length > 0 ? (
           // Render filtered news posts
           <section className="w-full md:w-2/3 mt-8 h-[70vh] overflow-auto scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-200">

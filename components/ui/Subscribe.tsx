@@ -1,4 +1,4 @@
-import { ReactNode, useState,useEffect } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import Image from "next/image";
 import axios from "axios";
 
@@ -42,18 +42,18 @@ export const Subscribe = ({ isOpen, onClose, message }: SubscribeProps) => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await axios.post('/api/subscribe', {
+      const response = await axios.post("/api/subscribe", {
         keyword,
         email,
         schedule: frequency,
       });
       console.log("Subscription response:", response.data);
-      setKeyword('');
-      setEmail('');
-      setFrequency('');
+      setKeyword("");
+      setEmail("");
+      setFrequency("");
       // Handle successful subscription (e.g., show a success message, reset form, etc.)
       setSuccessMessage(`Successfully subscribed to ${keyword}`);
-      setError(null)
+      setError(null);
     } catch (error) {
       console.error("Error subscribing:", error);
       if (axios.isAxiosError(error) && error.response) {
@@ -62,12 +62,11 @@ export const Subscribe = ({ isOpen, onClose, message }: SubscribeProps) => {
           setError(`Already subscribed to "${keyword}".`);
         } else {
           setError(errorMessage); // Show the actual error message from the API
-          
         }
       } else {
         setError("Failed to subscribe. Please try again.");
       }
-      setSuccessMessage(null)
+      setSuccessMessage(null);
     } finally {
       setIsLoading(false);
     }
@@ -83,7 +82,13 @@ export const Subscribe = ({ isOpen, onClose, message }: SubscribeProps) => {
           className="absolute top-1 right-2 text-gray-600 hover:text-gray-900 focus:outline-none"
           onClick={onClose}
         >
-          <Image src="/close.svg" alt="close" width={20} height={20} className="mb-3" />
+          <Image
+            src="/close.svg"
+            alt="close"
+            width={20}
+            height={20}
+            className="mb-3"
+          />
         </button>
         {/* main section of modal */}
         <div className="grid grid-cols-1 md:grid-cols-2 bg-gradient-to-br from-green-400 to-blue-500 rounded-lg overflow-hidden">
@@ -150,13 +155,11 @@ export const Subscribe = ({ isOpen, onClose, message }: SubscribeProps) => {
                   <option value="once_a_day">once a day</option>
                   <option value="twice_a_day">twice a day</option>
                   <option value="once_a_week">once a week</option>
-                  
-                
                 </select>
               </div>
               <div className="flex items-center justify-between">
                 <button
-                   className={`font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${
+                  className={`font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${
                     !isFormValid || isLoading
                       ? "bg-yellow-300 cursor-not-allowed"
                       : "bg-yellow-400 hover:bg-yellow-500 text-white"
@@ -168,7 +171,9 @@ export const Subscribe = ({ isOpen, onClose, message }: SubscribeProps) => {
                 </button>
               </div>
               {error && <p className="text-red-500 mt-4">{error}</p>}
-              {successMessage && <div className="mb-4 text-green-500">{successMessage}</div>}
+              {successMessage && (
+                <div className="mb-4 text-green-500">{successMessage}</div>
+              )}
             </form>
           </div>
         </div>

@@ -1,9 +1,9 @@
-import axios from 'axios';
+import axios from "axios";
 
-export default async function handler(req : any, res: any) {
+export default async function handler(req: any, res: any) {
   try {
     const { keyword } = req.query;
-    const url = keyword 
+    const url = keyword
       ? `https://newsaggregator-s588.onrender.com/aggregator/search?keyword=${keyword}`
       : `https://newsaggregator-s588.onrender.com/aggregator/search`;
 
@@ -11,6 +11,6 @@ export default async function handler(req : any, res: any) {
     res.status(200).json(response.data);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Error fetching data' });
+    res.status(500).json({ error: "Error fetching data" });
   }
 }
