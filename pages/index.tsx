@@ -11,41 +11,7 @@ import axios from "axios";
 import { News, NewsData } from "@/types/news";
 import ShimmerEffect from "@/components/ui/ShimmerEffect";
 import ErrorComponent from "@/components/ui/cors/ErrorComponent";
-// const newsData = {
-//   posts: [
-//     {
-//       date: "2024-03-21",
-//       thumbnailURL:
-//         "https://images.freeimages.com/images/large-previews/c31/colors-1383652.jpg",
-//       title:
-//         "Breaking News: Scientists Discover New Species of Glittering Beetles",
-//       source: "The Entomology Gazette",
-//       linkToNews: "https://example.com/article1",
-//       visited: false,
-//     },
-//     {
-//       date: "2024-03-21",
-//       thumbnailURL:
-//         "https://images.freeimages.com/images/large-previews/c31/colors-1383652.jpg",
-//       title:
-//         "SpaceX Launches First Tourist Mission SpaceX Launches First Tourist Mission SpaceX Launches First Tourist MissionSpaceX Launches First Tourist MissionSpaceX Launches First Tourist MissionSpaceX Launches First Tourist Mission ",
-//       source: "Galactic Explorer",
-//       linkToNews: "https://example.com/article2",
-//       visited: true,
-//     },
-//     {
-//       date: "2024-03-21",
-//       thumbnailURL:
-//         "https://images.freeimages.com/images/large-previews/c31/colors-1383652.jpg",
-//       title: "World's Largest Pizza Created in Italy",
-//       source: "Pizza Enthusiast Weekly",
-//       linkToNews: "https://example.com/article3",
-//       visited: false,
-//     },
-//   ],
-//   limit: 10,
-//   skip: 1,
-// };
+
 
 const Index: React.FC = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -62,7 +28,6 @@ const Index: React.FC = () => {
       setIsLoading(true);
       try {
         const response = await axios.get("/api/search");
-        console.log("response is", response.data.results);
 
         setNewsData(response.data);
         setFilteredPosts(response.data.results);
@@ -136,7 +101,7 @@ const Index: React.FC = () => {
           <ErrorComponent reset={resetError} />
         ) : filteredPosts.length > 0 ? (
           // Render filtered news posts
-          <section className="w-full md:w-2/3 mt-8 h-[70vh] overflow-auto scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-200">
+          <section className="w-full md:w-2/3 px-5 mt-8 h-[70vh] overflow-auto scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-200">
             {filteredPosts.map((post: News) => (
               <NewsCard post={post} key={post.title} />
             ))}
