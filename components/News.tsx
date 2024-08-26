@@ -22,15 +22,15 @@ const NewsCard: React.FC<Props> = ({ post }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 m-2 my-4 flex flex-col md:flex-row">
-      <div className="md:mr-4 mb-4 md:mb-0 md:w-[20vw] md:h-[30vh]">
+    <div className="w-full bg-white rounded-lg shadow-md p-4 m-2 my-6 flex flex-col md:flex-row transform transition-all hover:scale-105 duration-500 ease-in-out cursor-pointer">
+      <div className="md:mr-4 mb-4 md:mb-0 md:w-[20vw] h-[20vh]">
         <img
           src={post.thumbnail}
           alt={post.title}
           className="w-full h-full object-cover rounded-md"
         />
       </div>
-      <div className="flex flex-col justify-between md:w-[35vw] md:h-[30vh] ">
+      <div className="flex flex-col justify-between  md:h-[20vh] ">
         <div className="w-full h-full flex flex-col justify-center items-center md:justify-start md:items-start ">
           <h2 className="text-black font-semibold text-[0.8rem] mb-2 whitespace-normal">
             {post.title}
