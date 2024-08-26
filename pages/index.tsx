@@ -12,7 +12,6 @@ import { News, NewsData } from "@/types/news";
 import ShimmerEffect from "@/components/ui/ShimmerEffect";
 import ErrorComponent from "@/components/ui/cors/ErrorComponent";
 
-
 const Index: React.FC = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [newsData, setNewsData] = useState<NewsData>({ results: [] });

@@ -8,7 +8,7 @@ export default async function handler(req: any, res: any) {
       : `https://newsaggregator-s588.onrender.com/aggregator/search`;
 
     const response = await axios.get(url);
-    
+
     res.status(200).json(response.data);
   } catch (error) {
     console.error(error);
